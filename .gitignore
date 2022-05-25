@@ -1,0 +1,4 @@
+*.pyc
+src/qt3rfsynthcontrol.egg-info/*
+build/*
+dist/*
