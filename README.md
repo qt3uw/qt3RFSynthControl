@@ -100,6 +100,30 @@ rf_synth.rf_on(channel_A)
 rf_sythh.rf_off(channel_A)
 ```
 
+### Windfreak.SynthHD
+
+If you wish to use the `windfreak-python` SynthHD object instance directly, you
+can obtain it from the property `SynthHD`. Usage of
+[windfreak-python is documented here](https://github.com/christian-hahn/windfreak-python).
+
+
+```python
+windfreak_synthhd = rf_synth.SynthHD()
+
+print(windfreak_synthhd[0].power)
+print(windfreak_synthhd[0].frequency)
+```
+
+The documentation is a little sparse, however. The full set of commands are found in
+
+  * [the code](https://github.com/christian-hahn/windfreak-python/blob/master/windfreak/synth_hd.py#L337)
+  * [the programming manual](https://windfreaktech.com/wp-content/uploads/2016/12/WFT_SerialProgramming_API_10b.pdf)
+
+It can take a little effort to match the python API with the description in the manual as
+some of the `windfreak-python` API functions do not exactly match the function name in the manual.
+For example `sweep_single` in `windfreak-python` is called `sweep_run` or `run_sweep`
+in the programming manual.
+
 # LICENSE
 
 [LICENCE](LICENSE)
