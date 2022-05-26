@@ -220,6 +220,20 @@ class QT3SynthHD:
             self.logger.info(f'time for full scan = {total_time_in_s} s')
         self.logger.info(f'trigger mode = {self._inst.trigger_mode}')
 
+    def run_sweep(self, channel, on=True):
+        '''
+        Starts the frequency sweep.
+
+        Use this if `trigger_mode == disabled` to tell the RF Synth to begin the
+        frequency sweep.
+
+        If on = False, this stops a currently running sweep.
+
+        This is equivalent to the (`sweep_single`, on) command in windfreak-python,
+        which is equivalent to directly writing `g1`/`g0` to the serial port.  
+
+        '''
+        self._inst[channel].write('sweep_single',1 if on else 0)
 
     @property
     def synthHD(self):
