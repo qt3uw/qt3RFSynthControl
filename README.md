@@ -47,58 +47,60 @@ reveal the correct serial port to use.
 ### Connection to SynthHD
 
 ```python
-my_pulser = qt3rfsynthcontrol.Pulser('COM5')
+rf_synth = qt3rfsynthcontrol.Pulser('COM5')
 ```
 
-### Communication
-
-
-### System Settings
-
-Two methods exist to report on global and channel settings
-
-##### Global Settings
+### Hardware Info
 
 ```python
-import pprint
-pp = pprint.PrettyPrinter(indent=4)
-
-pp.pprint(my_pulser.report_global_settings())
+rf_synth.hw_info()
 ```
 
-##### Channel Settings
+### Current Signal Status
 
 ```python
-for channel in range(1,5):
-    pp.pprint(f'channel {channel}')
-    pp.pprint(my_pulser.report_channel_settings(channel))
+rf_synth.current_status()
 ```
 
-
-### Debugging
-
-If you hit an error, especially when trying to use the property-like calls,
-the last string written to the Serial port is found in the
-`.last_write_command` attribute of the pulser object.
+### Set Fixed Frequency
 
 ```python
-my_pulser.pulse1.width(25e-6)
-print(my_pulser.last_write_command)
-# ':PULSE1:WIDTH 2.5e-05'
+channel_A = 0
+channel_B = 1
+rf_synth.set_channel_fixed_output(channel_A, power = -5.0, frequency = 2870e6)
 ```
 
-Additionally, you can see the recent command history of the object (last 1000 commands)
+### Set Up For Frequency Scan
+
+Frequency scan can either be triggered externally (using the Quantum Composer
+  Sapphire pulser, or other), or can run independent of any external control.
 
 ```python
-for command in my_pulser.command_history():
-  print(command)
+channel_A = 0
+channel_B = 1
+rf_synth.set_frequency_sweep(channel_A, power = -5.0, frequency_low = 2820e6,
+                            frequency_high = 2920e6, n_steps = 101,
+                            trigger_mode = 'single frequency step',
+                            frequency_sample_time = 0.100)
+```
+
+See the function's documentation for further details
+
+```python
+help(rf_synth.set_frequency_sweep)
+```
+
+### Turn RF ON/OFF
+
+The RF generation can be turned on and off with
+
+```python
+channel_A = 0
+channel_B = 1
+rf_synth.rf_on(channel_A)
+rf_sythh.rf_off(channel_A)
 ```
 
 # LICENSE
 
 [LICENCE](LICENSE)
-
-##### Acknowledgments
-
-The `Property` class of this code was taken from `easy-scpi`: https://github.com/bicarlsen/easy-scpi
-and modified.
