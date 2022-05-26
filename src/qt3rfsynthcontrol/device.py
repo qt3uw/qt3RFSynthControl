@@ -221,39 +221,6 @@ class QT3SynthHD:
         self.logger.info(f'trigger mode = {self._inst.trigger_mode}')
 
 
-
-    # def query(self, data):
-    #     '''
-    #     Write to device and read response.
-    #
-    #     Args:
-    #         data (str)
-    #
-    #     Returns:
-    #         a string response from the device.
-    #
-    #         IF the argument to this fuction, data = ":INST:COMM?", however,
-    #         the return is a list of strings from the device.
-    #     '''
-    #     self._write(data)
-    #     if data.upper() in [':INST:COMM?',':INSTRUMENT:COMM?',':INST:COMMANDS?',':INSTRUMENT:COMMANDS?']:
-    #         return_val = self._readlines()
-    #     else:
-    #         return_val = self._readline()
-    #
-    #     return return_val
-
-
-    def command_history(self):
-        '''
-        returns an iterator to the most recent 1000 commands
-        sent to the device by an instance of this class.
-
-        The interator is in order of most recent command first.
-
-        '''
-        return reversed(self._command_history)
-
     @property
     def synthHD(self):
         return self._inst
