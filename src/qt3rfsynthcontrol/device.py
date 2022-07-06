@@ -4,6 +4,7 @@ import collections
 import windfreak
 import logging
 
+logger = logging.getLogger(__name__)
 
 def discover_devices():
     '''
@@ -84,6 +85,25 @@ class QT3SynthHD:
         status = self._readlines()
         return status
 
+    def set_continuous_sweep(self, continuous = 1):
+        self._inst.write('sweep_cont',continuous)
+
+    def start_sweep(self):
+        self._inst.write('sweep_single',1)
+
+    def stop_sweep(self):
+        self._inst.write('sweep_single',0)
+
+    def trigger_mode(self, mode='disabled'):
+        assert mode in ['disabled', 'enabled']
+        self._inst.trigger_mode = mode
+
+    def set_power(self, channel, power):
+        self._inst[channel].power = power
+
+    def set_frequency(self, channel, frequency):
+        self._inst[channel].frequency = frequency
+
     def set_channel_fixed_output(self, channel, power = None, frequency = None):
         '''
         Sets the power, frequency for a particular channel (0 = A, 1 = B)
@@ -91,12 +111,13 @@ class QT3SynthHD:
         This turns OFF any frequency sweep that is currently running and disables
         external triggering.
 
+        WARNING: this function is to be deprecated. Call each function separately:
+        stop_sweep()
+        trigger_mode('disabled')
+        set_power(power)
+        set_frequency(frequency)
         '''
-        #turn off any sweeps & disable external trigger
-        self._inst
-        self._inst.write('sweep_single',0)
-        self._inst.write('sweep_cont',0)
-        self._inst.trigger_mode = 'disabled'
+        logger.warning('This funciton is to be deprecated. Call `stop_sweep()`, `trigger_mode("disabled")`, `set_power(p)` and set_frequency(f), separately as needed.')
 
         if power:
             self._inst[channel].power = power
@@ -230,7 +251,7 @@ class QT3SynthHD:
         If on = False, this stops a currently running sweep.
 
         This is equivalent to the (`sweep_single`, on) command in windfreak-python,
-        which is equivalent to directly writing `g1`/`g0` to the serial port.  
+        which is equivalent to directly writing `g1`/`g0` to the serial port.
 
         '''
         self._inst[channel].write('sweep_single',1 if on else 0)
