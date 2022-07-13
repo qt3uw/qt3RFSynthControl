@@ -117,7 +117,7 @@ class QT3SynthHD:
         set_power(power)
         set_frequency(frequency)
         '''
-        logger.warning('This funciton is to be deprecated. Call `stop_sweep()`, `trigger_mode("disabled")`, `set_power(p)` and set_frequency(f), separately as needed.')
+        logger.warning('set_channel_fixed_output is to be deprecated. Call `stop_sweep()`, `trigger_mode("disabled")`, `set_power(p)` and set_frequency(f), separately as needed.')
 
         if power:
             self._inst[channel].power = power
