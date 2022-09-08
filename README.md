@@ -46,7 +46,7 @@ reveal the correct serial port to use.
 ### Connection to SynthHD
 
 ```python
-rf_synth = qt3rfsynthcontrol.Pulser('COM5')
+rf_synth = qt3rfsynthcontrol.QT3SynthHD('COM5')
 ```
 
 ### Hardware Info
