@@ -1,2 +1,3 @@
-from .__version__ import __version__
 from .device import QT3SynthHD, discover_devices
+
+__version__ = '1.0.1.dev0'

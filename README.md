@@ -6,9 +6,7 @@ Helper code to control [Windfreak's SynthHD RF generator](https://windfreaktech.
 ## Installation
 
 ```
-git clone https://github.com/gadamc/qt3RFSynthControl
-cd qt3rfsynthcontrol
-python -m pip install .
+pip install qt3rfsynthcontrol
 ```
 
 ## Usage
