@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qt3rfsynthcontrol"
-version = "1.0.1.dev1"
+version = "1.0.1"
 
 description = "A package for controlling the Windfreak SynthHD RF generator."
 readme = "README.md"
