@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qt3rfsynthcontrol"
-dynamic = ["version"] # version is defined in __init__.py
+version = "1.0.1.dev1"
 
 description = "A package for controlling the Windfreak SynthHD RF generator."
 readme = "README.md"
@@ -52,6 +52,3 @@ dependencies = [
 "Source" = "https://github.com/qt3uw/qt3rfsynthcontrol"
 "Bug Tracker" = "https://github.com/qt3uw/qt3rfsynthcontrol/issues"
 "Changelog" = "https://github.com/qt3uw/qt3rfsynthcontrol/releases"
-
-[tool.setuptools.dynamic]
-version = {attr = "qt3rfsynthcontrol.__version__"}
